@@ -42,7 +42,7 @@ export class MemStorage implements IStorage {
         genre: "Action",
         originalPrice: 39.99,
         claimUrl: "https://store.epicgames.com/en-US/p/control",
-        endDate: new Date("2024-12-30"),
+        endDate: new Date("2025-08-15"),
         isFree: true,
       },
       {
@@ -54,7 +54,7 @@ export class MemStorage implements IStorage {
         genre: "Simulation",
         originalPrice: 29.99,
         claimUrl: "https://store.steampowered.com/app/255710/Cities_Skylines/",
-        endDate: new Date("2024-01-05"),
+        endDate: new Date("2025-08-10"),
         isFree: true,
       },
       {
@@ -66,7 +66,7 @@ export class MemStorage implements IStorage {
         genre: "FPS",
         originalPrice: 59.99,
         claimUrl: "https://store.epicgames.com/en-US/p/metro-exodus",
-        endDate: new Date("2024-12-28"),
+        endDate: new Date("2025-08-20"),
         isFree: true,
       },
       {
@@ -78,7 +78,7 @@ export class MemStorage implements IStorage {
         genre: "Adventure",
         originalPrice: 44.99,
         claimUrl: "https://store.epicgames.com/en-US/p/a-plague-tale-innocence",
-        endDate: new Date("2024-12-29"),
+        endDate: new Date("2025-08-25"),
         isFree: true,
       },
       {
@@ -90,7 +90,7 @@ export class MemStorage implements IStorage {
         genre: "Survival",
         originalPrice: 24.99,
         claimUrl: "https://store.steampowered.com/app/264710/Subnautica/",
-        endDate: new Date("2024-01-02"),
+        endDate: new Date("2025-08-05"),
         isFree: true,
       },
       {
@@ -102,7 +102,7 @@ export class MemStorage implements IStorage {
         genre: "Party",
         originalPrice: 4.99,
         claimUrl: "https://store.steampowered.com/app/945360/Among_Us/",
-        endDate: new Date("2024-01-01"),
+        endDate: new Date("2025-07-31"),
         isFree: true,
       },
     ];
