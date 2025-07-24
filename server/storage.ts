@@ -225,8 +225,10 @@ export class MemStorage implements IStorage {
         const isFree = !game.requiresSubscription;
         const isSubscription = !!game.requiresSubscription;
         
-        return (filter.accessTypes!.includes("free") && isFree) ||
-               (filter.accessTypes!.includes("subscription") && isSubscription);
+        const matchesFree = filter.accessTypes!.includes("free") && isFree;
+        const matchesSubscription = filter.accessTypes!.includes("subscription") && isSubscription;
+        
+        return matchesFree || matchesSubscription;
       });
     }
 

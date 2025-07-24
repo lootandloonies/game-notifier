@@ -29,6 +29,7 @@ export class GameService {
       genre: filter.genre,
       minRating: filter.minRating,
       sortBy: filter.sortBy,
+      accessTypes: filter.accessTypes,
     });
   }
 
