@@ -3,6 +3,17 @@ import { createServer, type Server } from "http";
 import { gameService } from "./services/gameService";
 import { gameFilterSchema, insertGameSchema } from "@shared/schema";
 import { z } from "zod";
+import { Router } from "express";
+const router = Router();
+
+router.get('/nightbot', (req, res) => {
+  const freeGamesList = ['Game 1', 'Game 2', 'Game 3'];
+  res.set('Content-Type', 'text/plain');
+  res.send(`Free games right now: ${freeGamesList.join(', ')}`);
+});
+
+// Export router if not already done
+export default router;
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Get all games with optional filtering
