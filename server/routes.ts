@@ -7,11 +7,29 @@ import { Router } from "express";
 
 const router = Router();
 
-router.get('/nightbot', (req, res) => {
-  const freeGamesList = ['Game 1', 'Game 2', 'Game 3'];
-  res.set('Content-Type', 'text/plain');
-  res.send(`Free games right now: ${freeGamesList.join(', ')}`);
+router.get('/nightbot', async (req, res) => {
+  try {
+    // Fetch games from your service or DB (this might differ depending on your setup)
+    const allGames = await gameService.getAll(); // or whatever function you're using
+
+    // Filter for only currently free games
+    const freeGames = allGames.filter(game => game.price === 0 || game.isFree);
+
+    // Format a short list for chat
+    const gameNames = freeGames.slice(0, 5).map(game => game.name); // top 5
+
+    const message = gameNames.length
+      ? `Free games right now: ${gameNames.join(', ')}`
+      : "No free games found right now.";
+
+    res.set('Content-Type', 'text/plain');
+    res.send(message);
+  } catch (err) {
+    console.error('Error in /nightbot:', err);
+    res.status(500).send("Oops! Couldn't fetch games.");
+  }
 });
+
 
 // Export router if not already done
 export default router;
