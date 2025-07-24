@@ -112,7 +112,7 @@ export default function Home() {
               <div>
                 <h2 className="text-2xl font-bold text-foreground">Free Games Available Now</h2>
                 <p className="text-muted-foreground mt-1">
-                  Showing {games.length} free games
+                  Showing {games.length} demo games (Sample data for demonstration)
                 </p>
               </div>
               

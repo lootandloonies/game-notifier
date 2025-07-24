@@ -33,10 +33,12 @@ export class MemStorage implements IStorage {
   }
 
   private seedGames() {
+    // DEMO DATA NOTICE: These are example games for demonstration purposes only
+    // In a real application, this data would come from live APIs checking actual free game promotions
     const sampleGames: InsertGame[] = [
       {
-        title: "Control Ultimate Edition",
-        description: "A supernatural third-person action-adventure game with mind-bending abilities and shifting environments.",
+        title: "[DEMO] Control Ultimate Edition",
+        description: "DEMO GAME: A supernatural third-person action-adventure game with mind-bending abilities and shifting environments. This is sample data for demonstration purposes.",
         imageUrl: "https://images.unsplash.com/photo-1511512578047-dfb367046420?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450",
         platform: "Epic Games",
         rating: 8.7,
@@ -48,8 +50,8 @@ export class MemStorage implements IStorage {
         requiresSubscription: null, // Completely free
       },
       {
-        title: "Cities: Skylines",
-        description: "Modern take on the classic city simulation. Build the city of your dreams and manage complex urban systems.",
+        title: "[DEMO] Cities: Skylines",
+        description: "DEMO GAME: Modern take on the classic city simulation. This is sample data for demonstration purposes.",
         imageUrl: "https://images.unsplash.com/photo-1551103782-8ab07afd45c1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450",
         platform: "Steam",
         rating: 9.2,
@@ -61,8 +63,8 @@ export class MemStorage implements IStorage {
         requiresSubscription: "Prime Gaming", // Requires Amazon Prime
       },
       {
-        title: "Metro Exodus",
-        description: "Post-apocalyptic first-person shooter with immersive story and survival elements in a devastated world.",
+        title: "[DEMO] Metro Exodus",
+        description: "DEMO GAME: Post-apocalyptic first-person shooter. This is sample data for demonstration purposes.",
         imageUrl: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450",
         platform: "Epic Games",
         rating: 8.4,
@@ -74,8 +76,8 @@ export class MemStorage implements IStorage {
         requiresSubscription: null, // Completely free
       },
       {
-        title: "A Plague Tale: Innocence",
-        description: "Heart-wrenching adventure following siblings through plague-ridden medieval France with stealth gameplay.",
+        title: "[DEMO] A Plague Tale: Innocence",
+        description: "DEMO GAME: Heart-wrenching adventure game. This is sample data for demonstration purposes.",
         imageUrl: "https://images.unsplash.com/photo-1542273917363-3b1817f69a2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450",
         platform: "Epic Games",
         rating: 8.9,
@@ -87,8 +89,8 @@ export class MemStorage implements IStorage {
         requiresSubscription: "Game Pass", // Requires Xbox Game Pass
       },
       {
-        title: "Subnautica",
-        description: "Underwater adventure survival game with exploration, crafting, and mysterious oceanic creatures.",
+        title: "[DEMO] Subnautica",
+        description: "DEMO GAME: Underwater adventure survival game. This is sample data for demonstration purposes.",
         imageUrl: "https://images.unsplash.com/photo-1446776877081-d282a0f896e2?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450",
         platform: "Steam",
         rating: 9.1,
@@ -100,8 +102,8 @@ export class MemStorage implements IStorage {
         requiresSubscription: null, // Completely free
       },
       {
-        title: "Among Us",
-        description: "Social deduction party game where crewmates work together while trying to identify impostors among them.",
+        title: "[DEMO] Among Us",
+        description: "DEMO GAME: Social deduction party game. This is sample data for demonstration purposes.",
         imageUrl: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&h=450",
         platform: "Steam",
         rating: 7.8,
