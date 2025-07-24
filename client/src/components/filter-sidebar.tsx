@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { PLATFORMS, GENRES, RATING_OPTIONS, SUBSCRIPTION_OPTIONS } from "@/lib/types";
+import { PLATFORMS, GENRES, RATING_OPTIONS, ACCESS_TYPES } from "@/lib/types";
 import type { FilterState } from "@/lib/types";
 
 interface FilterSidebarProps {
@@ -32,8 +32,11 @@ export function FilterSidebar({ filters, onFiltersChange }: FilterSidebarProps) 
     onFiltersChange({ ...filters, minRating: rating });
   };
 
-  const handleSubscriptionChange = (subscriptionType: string) => {
-    onFiltersChange({ ...filters, subscriptionType });
+  const handleAccessTypeChange = (accessType: string, checked: boolean) => {
+    const newAccessTypes = checked
+      ? [...filters.accessTypes, accessType]
+      : filters.accessTypes.filter(t => t !== accessType);
+    onFiltersChange({ ...filters, accessTypes: newAccessTypes });
   };
 
   return (
@@ -55,6 +58,32 @@ export function FilterSidebar({ filters, onFiltersChange }: FilterSidebarProps) 
               className="gaming-input pl-10"
             />
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+          </div>
+        </div>
+
+        {/* Access Type Filter - Moved to top */}
+        <div className="mb-6">
+          <Label className="block text-sm font-medium text-muted-foreground mb-3">
+            Access Type
+          </Label>
+          <div className="space-y-2">
+            {ACCESS_TYPES.map((accessType) => (
+              <div key={accessType.value} className="flex items-center space-x-2">
+                <Checkbox
+                  id={`access-${accessType.value}`}
+                  checked={filters.accessTypes.includes(accessType.value)}
+                  onCheckedChange={(checked) => 
+                    handleAccessTypeChange(accessType.value, checked as boolean)
+                  }
+                />
+                <Label 
+                  htmlFor={`access-${accessType.value}`}
+                  className="text-sm font-medium text-foreground cursor-pointer"
+                >
+                  {accessType.label}
+                </Label>
+              </div>
+            ))}
           </div>
         </div>
 
@@ -122,24 +151,7 @@ export function FilterSidebar({ filters, onFiltersChange }: FilterSidebarProps) 
           </Select>
         </div>
 
-        {/* Subscription Type Filter */}
-        <div className="mb-6">
-          <Label className="block text-sm font-medium text-muted-foreground mb-3">
-            Access Type
-          </Label>
-          <Select value={filters.subscriptionType} onValueChange={handleSubscriptionChange}>
-            <SelectTrigger className="gaming-input">
-              <SelectValue placeholder="Select access type" />
-            </SelectTrigger>
-            <SelectContent>
-              {SUBSCRIPTION_OPTIONS.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
-        </div>
+
       </div>
     </aside>
   );

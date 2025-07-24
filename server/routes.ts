@@ -15,7 +15,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
         genre,
         minRating,
         sortBy,
-        subscriptionType
+        accessTypes
       } = req.query;
 
       // Build filter object with proper type handling
@@ -48,8 +48,12 @@ export async function registerRoutes(app: Express): Promise<Server> {
         filterData.sortBy = sortBy;
       }
       
-      if (subscriptionType && typeof subscriptionType === 'string') {
-        filterData.subscriptionType = subscriptionType;
+      if (accessTypes) {
+        if (Array.isArray(accessTypes)) {
+          filterData.accessTypes = accessTypes;
+        } else if (typeof accessTypes === 'string') {
+          filterData.accessTypes = [accessTypes];
+        }
       }
       
       console.log("Parsed filter data:", filterData);

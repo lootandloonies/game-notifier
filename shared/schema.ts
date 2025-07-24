@@ -35,7 +35,7 @@ export const gameFilterSchema = z.object({
   genre: z.string().optional(),
   minRating: z.number().optional(),
   sortBy: z.enum(["latest", "rating", "name", "endDate"]).optional(),
-  subscriptionType: z.enum(["all", "free", "subscription"]).optional(),
+  accessTypes: z.array(z.string()).optional(),
 });
 
 export type GameFilter = z.infer<typeof gameFilterSchema>;

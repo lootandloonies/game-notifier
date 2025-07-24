@@ -4,7 +4,7 @@ export interface FilterState {
   genre: string;
   minRating: string;
   sortBy: string;
-  subscriptionType: string;
+  accessTypes: string[];
 }
 
 export interface ViewState {
@@ -47,8 +47,7 @@ export const SORT_OPTIONS = [
   { value: "endDate", label: "Sort by: End Date" },
 ];
 
-export const SUBSCRIPTION_OPTIONS = [
-  { value: "all", label: "All Games" },
+export const ACCESS_TYPES = [
   { value: "free", label: "Completely Free" },
   { value: "subscription", label: "Subscription Required" },
 ];

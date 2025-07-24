@@ -19,7 +19,7 @@ export default function Home() {
     genre: "All Genres",
     minRating: "all",
     sortBy: "latest",
-    subscriptionType: "all",
+    accessTypes: ["free", "subscription"], // Show both by default
   });
 
   const [viewState, setViewState] = useState<ViewState>({
@@ -41,7 +41,9 @@ export default function Home() {
     }
     if (filters.minRating && filters.minRating !== "all") params.append('minRating', filters.minRating);
     if (filters.sortBy) params.append('sortBy', filters.sortBy);
-    if (filters.subscriptionType && filters.subscriptionType !== "all") params.append('subscriptionType', filters.subscriptionType);
+    if (filters.accessTypes.length > 0) {
+      filters.accessTypes.forEach(type => params.append('accessTypes', type));
+    }
     
     return params.toString();
   }, [filters]);

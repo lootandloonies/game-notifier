@@ -17,7 +17,7 @@ export interface IStorage {
     genre?: string;
     minRating?: number;
     sortBy?: string;
-    subscriptionType?: string;
+    accessTypes?: string[];
   }): Promise<Game[]>;
 }
 
@@ -191,7 +191,7 @@ export class MemStorage implements IStorage {
     genre?: string;
     minRating?: number;
     sortBy?: string;
-    subscriptionType?: string;
+    accessTypes?: string[];
   }): Promise<Game[]> {
     let games = Array.from(this.games.values());
 
@@ -219,17 +219,15 @@ export class MemStorage implements IStorage {
       games = games.filter(game => game.rating && game.rating >= filter.minRating!);
     }
 
-    // Apply subscription filter
-    if (filter.subscriptionType) {
-      switch (filter.subscriptionType) {
-        case "free":
-          games = games.filter(game => !game.requiresSubscription);
-          break;
-        case "subscription":
-          games = games.filter(game => game.requiresSubscription);
-          break;
-        // "all" case: no filtering needed
-      }
+    // Apply access type filter (checkbox-style filtering)
+    if (filter.accessTypes && filter.accessTypes.length > 0) {
+      games = games.filter(game => {
+        const isFree = !game.requiresSubscription;
+        const isSubscription = !!game.requiresSubscription;
+        
+        return (filter.accessTypes!.includes("free") && isFree) ||
+               (filter.accessTypes!.includes("subscription") && isSubscription);
+      });
     }
 
     // Apply sorting
