@@ -14,9 +14,9 @@ router.get('/nightbot', (req, res) => {
 
 // Export router if not already done
 export default router;
-app.use(router);
 
 export async function registerRoutes(app: Express): Promise<Server> {
+  app.use(router);
   // Get all games with optional filtering
   app.get("/api/games", async (req, res) => {
     try {
