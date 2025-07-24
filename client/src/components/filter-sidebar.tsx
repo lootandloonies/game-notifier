@@ -4,7 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { PLATFORMS, GENRES, RATING_OPTIONS } from "@/lib/types";
+import { PLATFORMS, GENRES, RATING_OPTIONS, SUBSCRIPTION_OPTIONS } from "@/lib/types";
 import type { FilterState } from "@/lib/types";
 
 interface FilterSidebarProps {
@@ -30,6 +30,10 @@ export function FilterSidebar({ filters, onFiltersChange }: FilterSidebarProps) 
 
   const handleRatingChange = (rating: string) => {
     onFiltersChange({ ...filters, minRating: rating });
+  };
+
+  const handleSubscriptionChange = (subscriptionType: string) => {
+    onFiltersChange({ ...filters, subscriptionType });
   };
 
   return (
@@ -110,6 +114,25 @@ export function FilterSidebar({ filters, onFiltersChange }: FilterSidebarProps) 
             </SelectTrigger>
             <SelectContent>
               {RATING_OPTIONS.map((option) => (
+                <SelectItem key={option.value} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+
+        {/* Subscription Type Filter */}
+        <div className="mb-6">
+          <Label className="block text-sm font-medium text-muted-foreground mb-3">
+            Access Type
+          </Label>
+          <Select value={filters.subscriptionType} onValueChange={handleSubscriptionChange}>
+            <SelectTrigger className="gaming-input">
+              <SelectValue placeholder="Select access type" />
+            </SelectTrigger>
+            <SelectContent>
+              {SUBSCRIPTION_OPTIONS.map((option) => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
                 </SelectItem>

@@ -19,6 +19,7 @@ export default function Home() {
     genre: "All Genres",
     minRating: "all",
     sortBy: "latest",
+    subscriptionType: "all",
   });
 
   const [viewState, setViewState] = useState<ViewState>({
@@ -40,6 +41,7 @@ export default function Home() {
     }
     if (filters.minRating && filters.minRating !== "all") params.append('minRating', filters.minRating);
     if (filters.sortBy) params.append('sortBy', filters.sortBy);
+    if (filters.subscriptionType && filters.subscriptionType !== "all") params.append('subscriptionType', filters.subscriptionType);
     
     return params.toString();
   }, [filters]);

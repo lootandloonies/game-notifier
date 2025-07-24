@@ -14,6 +14,7 @@ export const games = pgTable("games", {
   claimUrl: text("claim_url").notNull(),
   endDate: timestamp("end_date"),
   isFree: boolean("is_free").default(true),
+  requiresSubscription: text("requires_subscription"), // null = completely free, "Prime Gaming", "Game Pass", etc.
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });
@@ -34,6 +35,7 @@ export const gameFilterSchema = z.object({
   genre: z.string().optional(),
   minRating: z.number().optional(),
   sortBy: z.enum(["latest", "rating", "name", "endDate"]).optional(),
+  subscriptionType: z.enum(["all", "free", "subscription"]).optional(),
 });
 
 export type GameFilter = z.infer<typeof gameFilterSchema>;

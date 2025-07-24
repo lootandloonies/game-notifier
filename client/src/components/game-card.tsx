@@ -71,9 +71,16 @@ export function GameCard({ game }: GameCardProps) {
       
       <div className="p-4">
         <div className="flex items-center justify-between mb-2">
-          <Badge className="bg-accent text-accent-foreground text-xs font-bold">
-            FREE
-          </Badge>
+          <div className="flex items-center space-x-2">
+            <Badge className="bg-accent text-accent-foreground text-xs font-bold">
+              {game.requiresSubscription ? game.requiresSubscription : "FREE"}
+            </Badge>
+            {game.requiresSubscription && (
+              <Badge className="bg-orange-600 text-white text-xs">
+                Subscription
+              </Badge>
+            )}
+          </div>
           <Badge className={`text-xs ${getPlatformColor(game.platform)}`}>
             {game.platform}
           </Badge>

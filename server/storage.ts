@@ -17,6 +17,7 @@ export interface IStorage {
     genre?: string;
     minRating?: number;
     sortBy?: string;
+    subscriptionType?: string;
   }): Promise<Game[]>;
 }
 
@@ -44,6 +45,7 @@ export class MemStorage implements IStorage {
         claimUrl: "https://store.epicgames.com/en-US/p/control",
         endDate: new Date("2025-08-15"),
         isFree: true,
+        requiresSubscription: null, // Completely free
       },
       {
         title: "Cities: Skylines",
@@ -56,6 +58,7 @@ export class MemStorage implements IStorage {
         claimUrl: "https://store.steampowered.com/app/255710/Cities_Skylines/",
         endDate: new Date("2025-08-10"),
         isFree: true,
+        requiresSubscription: "Prime Gaming", // Requires Amazon Prime
       },
       {
         title: "Metro Exodus",
@@ -68,6 +71,7 @@ export class MemStorage implements IStorage {
         claimUrl: "https://store.epicgames.com/en-US/p/metro-exodus",
         endDate: new Date("2025-08-20"),
         isFree: true,
+        requiresSubscription: null, // Completely free
       },
       {
         title: "A Plague Tale: Innocence",
@@ -80,6 +84,7 @@ export class MemStorage implements IStorage {
         claimUrl: "https://store.epicgames.com/en-US/p/a-plague-tale-innocence",
         endDate: new Date("2025-08-25"),
         isFree: true,
+        requiresSubscription: "Game Pass", // Requires Xbox Game Pass
       },
       {
         title: "Subnautica",
@@ -92,6 +97,7 @@ export class MemStorage implements IStorage {
         claimUrl: "https://store.steampowered.com/app/264710/Subnautica/",
         endDate: new Date("2025-08-05"),
         isFree: true,
+        requiresSubscription: null, // Completely free
       },
       {
         title: "Among Us",
@@ -104,6 +110,7 @@ export class MemStorage implements IStorage {
         claimUrl: "https://store.steampowered.com/app/945360/Among_Us/",
         endDate: new Date("2025-07-31"),
         isFree: true,
+        requiresSubscription: "PlayStation Plus", // Requires PS Plus
       },
     ];
 
@@ -150,6 +157,7 @@ export class MemStorage implements IStorage {
       originalPrice: insertGame.originalPrice ?? null,
       endDate: insertGame.endDate ?? null,
       isFree: insertGame.isFree ?? true,
+      requiresSubscription: insertGame.requiresSubscription ?? null,
       createdAt: now,
       updatedAt: now,
     };
@@ -181,6 +189,7 @@ export class MemStorage implements IStorage {
     genre?: string;
     minRating?: number;
     sortBy?: string;
+    subscriptionType?: string;
   }): Promise<Game[]> {
     let games = Array.from(this.games.values());
 
@@ -206,6 +215,19 @@ export class MemStorage implements IStorage {
     // Apply rating filter
     if (filter.minRating) {
       games = games.filter(game => game.rating && game.rating >= filter.minRating!);
+    }
+
+    // Apply subscription filter
+    if (filter.subscriptionType) {
+      switch (filter.subscriptionType) {
+        case "free":
+          games = games.filter(game => !game.requiresSubscription);
+          break;
+        case "subscription":
+          games = games.filter(game => game.requiresSubscription);
+          break;
+        // "all" case: no filtering needed
+      }
     }
 
     // Apply sorting
