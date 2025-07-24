@@ -4,6 +4,7 @@ import { gameService } from "./services/gameService";
 import { gameFilterSchema, insertGameSchema } from "@shared/schema";
 import { z } from "zod";
 import { Router } from "express";
+
 const router = Router();
 
 router.get('/nightbot', (req, res) => {
@@ -16,7 +17,8 @@ router.get('/nightbot', (req, res) => {
 export default router;
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  app.use(router);
+  app.use(router)
+  
   // Get all games with optional filtering
   app.get("/api/games", async (req, res) => {
     try {
