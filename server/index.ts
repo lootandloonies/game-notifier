@@ -55,6 +55,13 @@ app.use((req, res, next) => {
   } else {
     serveStatic(app);
   }
+app.get('/nightbot', (req, res) => {
+  // TODO: Replace this with your real free games data
+  const freeGamesList = ['Game 1', 'Game 2', 'Game 3'];
+
+  res.set('Content-Type', 'text/plain');
+  res.send(`Free games right now: ${freeGamesList.join(', ')}`);
+});
 
   // ALWAYS serve the app on the port specified in the environment variable PORT
   // Other ports are firewalled. Default to 5000 if not specified.
